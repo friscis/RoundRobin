@@ -87,7 +87,7 @@ for (let i = 0; i < (matchLength)*(matchLength-1); ++i) {
   console.log(i);
   elem.addEventListener('click', function() {
         console.log("Button "+ document.getElementById('button_' + i).textContent +" clicked");
-	Cookies.set(document.getElementById('button_' + i).textContent, Cookies.get(document.getElementById('button_' + i).textContent)+1);
+	Cookies.set(document.getElementById('button_' + i).textContent, Number(Cookies.get(document.getElementById('button_' + i).textContent))+1);
     });
 }
 
