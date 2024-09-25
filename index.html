@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="
+https://cdn.jsdelivr.net/npm/js-cookie@3.0.5/dist/js.cookie.min.js
+"></script>
+</head>
+<body>
+
+<h2>Round Robin Tester</h2>
+
+<p id="demo"></p>
+
+<script>
+
+function generateRoundRobinMatches(allTeams) {
+	numTeams = allTeams.length;
+  //const teams = Array.from({ length: numTeams }, (_, i) => i + 1);
+  const numRounds = numTeams - 1;
+  const matchesPerRound = numTeams / 2;
+
+  const matches = [];
+  for (let round = 0; round < numRounds; round++) {
+    for (let match = 0; match < matchesPerRound; match++) {
+      const home = allTeams[match];
+      const away = allTeams[numTeams - 1 - match];
+      matches.push([home, away]);
+    }
+
+    // Rotate teams (except the first) for the next round
+    const temp = teams[1];
+    for (let i = 1; i < numTeams - 1; i++) {
+      teams[i] = teams[i + 1];
+    }
+    teams[numTeams - 1] = temp;
+  }
+
+  return matches;
+}
+
+function generateButtonOptions(match, ind) {
+	const button1 = document.createElement("button");
+  button1.textContent = match[0];
+  button1.id = "button_" + ((ind-1)*2);
+  button1.classList.add("btn", "btn-primary");
+
+  const button2 = document.createElement("button");
+  button2.textContent = match[1];
+  button2.id = "button_" + (((ind-1)*2)+1);
+  button2.classList.add("btn", "btn-success");
+  
+  document.getElementById("demo").innerHTML +=`</br> Match ${ind} :</br>`;
+  
+  // Append buttons to a container (you'll need to have a suitable container in your HTML)
+  const container = document.getElementById("demo"); // Replace with your container's ID
+  container.appendChild(button1);
+  container.appendChild(button2);  
+}
+
+const teams = ["Boneyard", "Dragonskin", "Marble", "Elysium", "Jackalope", "Edencloth"];
+const matchLength = teams.length;
+
+// Example usage for a 64-team round-robin
+const allMatches = generateRoundRobinMatches(teams);
+
+// Cycle through matches (you can add more logic here as needed)
+for (const matc of allMatches) {
+  //document.getElementById("demo").innerHTML +=`Match ${allMatches.indexOf(match)} : Team ${match[0]} vs Team ${match[1]} </br>`;
+  // Create button elements and set their text content
+  
+  generateButtonOptions(matc, allMatches.indexOf(matc)+1)
+}
+
+for (let i = 0; i < (matchLength)*(matchLength-1); ++i) {
+  var elem = document.getElementById('button_' + i);
+  console.log(i);
+  elem.addEventListener('click', function() {
+        console.log("Button "+ document.getElementById('button_' + i).textContent +" clicked");
+    });
+}
+
+// Example usage
+Cookies.set('name','hi');
+Cookies.get('name');
+Cookies.get();
+
+</script>
+
+</body>
+</html>
