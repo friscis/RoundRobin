@@ -74,20 +74,22 @@ for (const matc of allMatches) {
   generateButtonOptions(matc, allMatches.indexOf(matc)+1)
 }
 
-for (let i = 0; i < (matchLength)*(matchLength-1); ++i) {
-  var elem = document.getElementById('button_' + i);
-  console.log(i);
-  elem.addEventListener('click', function() {
-        console.log("Button "+ document.getElementById('button_' + i).textContent +" clicked");
-    });
-}
-
 // Example usage
 for(const fabric of teams) {
 	Cookies.set(fabric,'0');
 }
 console.log(Cookies.get('Boneyard'));
 console.log(Cookies.get());
+
+
+for (let i = 0; i < (matchLength)*(matchLength-1); ++i) {
+  var elem = document.getElementById('button_' + i);
+  console.log(i);
+  elem.addEventListener('click', function() {
+        console.log("Button "+ document.getElementById('button_' + i).textContent +" clicked");
+	Cookies.set(document.getElementById('button_' + i).textContent, Cookies.get(document.getElementById('button_' + i).textContent)+1);
+    });
+}
 
 </script>
 
