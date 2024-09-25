@@ -83,7 +83,7 @@ for (let i = 0; i < (matchLength)*(matchLength-1); ++i) {
 }
 
 // Example usage
-for(const fabric in teams) {
+for(const fabric of teams) {
 	Cookies.set(fabric,'0');
 }
 console.log(Cookies.get('Boneyard'));
